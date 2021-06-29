@@ -44,19 +44,9 @@ const clearAllTestUsers = async(userPollId, usernameRegex) => {
     });
 };
 
-const main = async(event) => {
-    console.log('Event:', event);
-
-    let region = process.env.AWS_REGION;
-    let regex = process.env.NAME_REGEX;
-    let pullId = process.env.USER_PULL_ID;
-    console.log(`REGION: ${region}`);
-    console.log(`REGEX: ${regex}`);
-    console.log(`PULL_ID: ${pullId}`);
-    
-
-    cognito.region = region;
-    return clearAllTestUsers(event.userPollId, event.usernameRegex);
+const main = async() => {
+    cognito.region = process.env.AWS_REGION;
+    return clearAllTestUsers(process.env.USER_PULL_ID, process.env.NAME_REGEX);
 };
 
 exports.lambdaHandler = main;

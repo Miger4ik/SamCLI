@@ -1,0 +1,12 @@
+
+sam package \
+  --template-file template.yaml \
+  --output-template-file package.yaml  \
+  --s3-bucket migera-test-bucket
+
+sam deploy \
+  --template-file package.yaml \
+  --stack-name js-lambda-delete-users \
+  --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND \
+  --role-arn arn:aws:iam::384875608721:role/lambda-role \
+  --region us-east-2
