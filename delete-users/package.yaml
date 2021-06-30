@@ -12,7 +12,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://migera-test-bucket/a75b6e3932ae0487b2050e2625ab1df8
+      CodeUri: s3://migera-test-bucket/ebb951723980b8737841e8056dcdb8a8
       Handler: app.lambdaHandler
       Runtime: nodejs14.x
       Events:
@@ -31,10 +31,4 @@ Outputs:
     Value:
       Fn::GetAtt:
       - HelloWorldFunction
-      - Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
-    Value:
-      Fn::GetAtt:
-      - HelloWorldFunctionRole
       - Arn

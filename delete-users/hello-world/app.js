@@ -51,5 +51,4 @@ const main = async() => {
 
 exports.lambdaHandler = main;
 // js-lambda-delete-users
-// something changes
 
