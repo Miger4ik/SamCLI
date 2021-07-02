@@ -27,7 +27,7 @@ Resources:
         Variables:
           NAME_REGEX: "test_.*"
           USER_PULL_ID: us-east-2_BSmTaxcbR
-        # LOG_GROUP_NAME: !Ref LogGroupName
+          # MAX_DAYS_EXISTENCE: 5
 
       Policies:
         - Statement:
