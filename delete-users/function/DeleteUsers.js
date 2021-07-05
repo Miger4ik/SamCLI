@@ -24,7 +24,7 @@ const deleteAllTestUsers = async(userPoolId, usernameRegex, maxDaysExistence) =>
 
 const main = async() => {
     cognito.region = process.env.AWS_REGION;
-    deleteAllTestUsers(process.env.USER_PULL_ID, process.env.NAME_REGEX, process.env.MAX_DAYS_EXISTENCE);
+    return deleteAllTestUsers(process.env.USER_PULL_ID, process.env.NAME_REGEX, process.env.MAX_DAYS_EXISTENCE);
 };
 
 exports.lambdaHandler = main;

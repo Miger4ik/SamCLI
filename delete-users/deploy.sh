@@ -11,6 +11,3 @@ sam deploy --debug \
   --s3-bucket $BUCKET \
   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND \
 
-# --parameter-overrides "LogGroupName=$LOG_GROUP_NAME" \
-
-
