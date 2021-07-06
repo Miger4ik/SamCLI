@@ -10,9 +10,13 @@ Globals:
   Function:
     Timeout: 900
 
-# Parameters:
-#   LogGroupName:
-#     Type: String
+Parameters:
+  NameRegex:
+    Type: String
+  UserPullId:
+    Type: String
+  MaxDaysExistence:
+    Type: Number
 
 Resources:
   DeleteUsers:
@@ -25,9 +29,9 @@ Resources:
 
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          NAME_REGEX: "test_.*"
-          USER_PULL_ID: us-east-2_BSmTaxcbR
-          # MAX_DAYS_EXISTENCE: 5
+          NAME_REGEX: !Ref NameRegex
+          USER_PULL_ID: !Ref UserPullId
+          MAX_DAYS_EXISTENCE: !Ref MaxDaysExistence
 
       Policies:
         - Statement:

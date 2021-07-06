@@ -2,24 +2,26 @@
 const AWS = require('aws-sdk');
 const cognito = new AWS.CognitoIdentityServiceProvider();
 
+function isTestUser(user, usernameRegex, maxDaysExistence) {
+    return user.Username.match(usernameRegex) || existMoreThen(user.UserCreateDate, maxDaysExistence);
+}
+
 function getDaysOfExistenceUser(registrationDate) {
     return Math.floor((Date.now() - Date.parse(registrationDate)) / (60*60*24*1000));
 }
 
 function existMoreThen(registrationDate, maxDaysExistence) {
-    return registrationDate && getDaysOfExistenceUser(registrationDate) > maxDaysExistence;
+    return maxDaysExistence == 0 ? false : getDaysOfExistenceUser(registrationDate) > maxDaysExistence;
 }
 
 const deleteAllTestUsers = async(userPoolId, usernameRegex, maxDaysExistence) => {
     const data = await cognito.listUsers({UserPoolId: userPoolId}).promise();
-    await Promise.all(data.Users.map(u => {
-        if (u.Username.match(usernameRegex) || existMoreThen(u.UserCreateDate, maxDaysExistence)) {
-            console.log(`Delete: ${u.Username}`);
-            return cognito.adminDeleteUser({UserPoolId: userPoolId, Username: u.Username}).promise();
-        } else {
-            return Promise.resolve();
-        }
-    }));
+
+    await Promise.all(data.Users.filter(user => isTestUser(user, usernameRegex, maxDaysExistence))
+        .map(user => {
+            console.log(`Deleting: ${user.Username}`);
+            return cognito.adminDeleteUser({UserPoolId: userPoolId, Username: user.Username}).promise();
+        }));
 };
 
 const main = async() => {
