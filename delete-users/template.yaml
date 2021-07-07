@@ -39,13 +39,13 @@ Resources:
             Effect: Allow
             Action:
               - cognito-idp:ListUsers
-            Resource: "*"
+            Resource: "arn:aws:cognito-idp:us-east-2:384875608721:userpool/us-east-2_BSmTaxcbR"
         - Statement:
           - Sid: CognitoAdminDeleteUser
             Effect: Allow
             Action:
               - cognito-idp:AdminDeleteUser
-            Resource: "*"
+            Resource: "arn:aws:cognito-idp:us-east-2:384875608721:userpool/us-east-2_BSmTaxcbR"
 
       # Events:
       #   DeleteUsers:
